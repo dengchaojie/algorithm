@@ -2,5 +2,10 @@
 <Timeline
    version = "3.0">
    <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/chaojiedeng/github/algorithm/463%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF.playground#CharacterRangeLen=55&amp;CharacterRangeLoc=881&amp;EndingColumnNumber=0&amp;EndingLineNumber=40&amp;StartingColumnNumber=0&amp;StartingLineNumber=37&amp;Timestamp=588907053.931841"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

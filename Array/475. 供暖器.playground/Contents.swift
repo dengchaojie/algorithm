@@ -7,21 +7,32 @@ class Solution {
         if count1 < count2 {
             return banJing
         }
-        var minZhiJing = 25000
+        let chaFirst = heaters.first! - houses.first!
+        let chaLast = houses.last! - heaters.last!
+        let chaTwo = max(chaLast, chaFirst)
+        var maxCha = max(heaters[0]-1, chaTwo)
+        var chaNei = 0
         for index in 0...(count2-1) {
-            let currentWeiZhi = heaters[index];
-            let currentZhiJing = houses[currentWeiZhi]
-            if currentZhiJing < minZhiJing {
-                minZhiJing = currentZhiJing
+            if index + 1 <= (count2-1) {
+                let cha = heaters[index + 1] - heaters[index]
+                if chaNei < cha {
+                    chaNei = cha
+                }
             }
+            
         }
-        banJing = minZhiJing / 2
+        if chaNei / 2 > maxCha {
+            banJing = chaNei / 2
+
+        }else {
+            banJing = maxCha
+        }
         
         return banJing
     }
 }
 
 let obj = Solution.init()
-print(obj.findRadius([1,2,3], [2]))
+print(obj.findRadius([1,2,3,5,15], [2,30]))
 
 
