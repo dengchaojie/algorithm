@@ -20,7 +20,7 @@ class Solution {
         return index + 1
     }
 }
-var mutArr = [1,2,1,2]//[1,1,2]//
+var mutArr = [1,1,2,2]//[1,1,2]//
 let obj = Solution()
 print(obj.removeDuplicates(&mutArr))
 
