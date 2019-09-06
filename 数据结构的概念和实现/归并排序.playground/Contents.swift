@@ -21,15 +21,29 @@ extension Array where Element: Comparable {
         if myArraySlice.count < 2 {
             return myArraySlice
         }else {
+            // 方式1
             let midIndex = (myArraySlice.startIndex + myArraySlice.endIndex) / 2
-//            let midIndex = myArraySlice.count / 2
+            print("\(midIndex) -- \(myArraySlice.startIndex) -- \(myArraySlice.endIndex)")
             let leftSlice = myArraySlice[myArraySlice.startIndex..<midIndex]
             let rightSlice = myArraySlice[midIndex..<myArraySlice.endIndex]
+// 方式2
+//            let midIndex = myArraySlice.count / 2
+//            print("\(midIndex) -- \(myArraySlice.startIndex) -- \(myArraySlice.endIndex)")
+//            let newSlice = ArraySlice.init(myArraySlice)
+//            print("\(midIndex) -- \(newSlice.startIndex) -- \(newSlice.endIndex)")
+//            let leftSlice = newSlice[0..<midIndex]
+//            let rightSlice = newSlice[midIndex..<newSlice.count]
+            print(leftSlice)
+            print(rightSlice)
+
             let slice1 = mergeSortSlice(leftSlice)
+            print(slice1)
+
             let slice2 = mergeSortSlice(rightSlice)
+            print(slice2)
+
             return merge(slice1, slice2)
         }
-        
     }
     
     private func merge(_ leftSlice: ArraySlice<Element>, _ rightSlice: ArraySlice<Element>) -> ArraySlice<Element> {
@@ -60,10 +74,10 @@ extension Array where Element: Comparable {
     
 }
 
-
 //var obj = [8 , 4 , 7 , 7 , 4 , 9 , 3]
-//obj.mergeSort()
-//print(obj)
+var obj = [8 , 4 , 7, 3]
+obj.mergeSort()
+print(obj)
 
 //let newArr = obj.mergeSorted()
 //print(newArr)
