@@ -1,6 +1,5 @@
 
 // 排序算法中的一种
-//let midIndex = myArraySlice.count / 2，会崩溃，还没搞明白
 // 面向协议编程
 extension Array where Element: Comparable {
     public mutating func mergeSort() {
