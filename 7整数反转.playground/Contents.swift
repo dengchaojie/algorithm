@@ -1,11 +1,10 @@
-let a = 2<<31
-print(a)
 
+//https://leetcode-cn.com/problems/reverse-integer/submissions/
 class Solution {
-    let a = 2<<31
+    let a = 1<<31
     func reverse(_ x: Int) -> Int {
         if x > 0 {
-            if x > 2<<31 - 1 {
+            if x > 1<<31 - 1 {
                 return 0
             }
             var strReverse = ""
@@ -21,13 +20,13 @@ class Solution {
                 }
             }
             let result = Int(strReverse)!
-            if result > 2<<31 - 1 {
+            if result > 1<<31 - 1 {
                 return 0
             }
             return result
         }else if x < 0
         {
-            if x < -2<<31 {
+            if x < -1<<31 {
                 return 0
             }
             var strReverse = "-"
@@ -55,8 +54,6 @@ class Solution {
         {
             return 0
         }
-        
-        
     }
 }
 
