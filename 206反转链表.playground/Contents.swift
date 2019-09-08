@@ -12,13 +12,18 @@ public class ListNode {
 // die dai
 class Solution {
     func reverseList(_ head: ListNode?) -> ListNode? {
+        if head == nil {
+            return nil
+        }
+        let newHead = ListNode.init(head!.val)
         var temp = head?.next
-        head?.next = nil
-        temp = temp?.next
+        while temp != nil {
+            temp?.next
+            temp = temp?.next
+        }
         
-        
+        return newHead
     }
-    
     
 }
 
