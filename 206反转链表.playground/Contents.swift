@@ -9,24 +9,36 @@ public class ListNode {
       self.next = nil
   }
 }
-// die dai
+
 class Solution {
     func reverseList(_ head: ListNode?) -> ListNode? {
-        if head == nil {
-            return nil
+// die dai
+        var temp: ListNode?
+        var first = head
+        while first != nil {
+            let second = first!.next
+            first?.next  = temp
+            temp = first
+            first = second
         }
-        let newHead = ListNode.init(head!.val)
-        var temp = head?.next
-        while temp != nil {
-            temp?.next
-            temp = temp?.next
-        }
-        
-        return newHead
+
+        return temp
     }
+    // di gui
+    func reverseNode(head: ListNode?) -> ListNode? {
+        guard let h = head, let next = h.next else {
+            return head
+        }
+        let node = self.reverseNode(head: next)
+        next.next = h
+        h.next = nil
+        return node
+    
+    }
+    
     
 }
 
 
 
-// di gui
+
