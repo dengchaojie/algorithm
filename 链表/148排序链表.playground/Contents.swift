@@ -13,44 +13,55 @@ public class ListNode {
 
 class Solution {
     func sortList(_ head: ListNode?) -> ListNode? {
-        let dummy = ListNode(0)
+        
+    }
+}
+/*
+class Solution {
+    func sortList(_ head: ListNode?) -> ListNode? {
+        let dummy = ListNode(-1)
+        var t1 = ListNode(-1)
         var temp = head
-        while let t = temp {
-            var temp2 = dummy.next
+        print(head?.val as Any)
+        while temp != nil {
             var node = dummy
-            while let t2 = temp2 {
-                if t.val < t2.val {
-                    t.next = temp2
+            var temp2 = dummy.next
+            while temp2 != nil {
+                if temp!.val < temp2!.val {
+                    temp!.next = temp2
                     node.next = temp
                     
                     break
                 }else {
-                    node = t2
-                    temp2 = t2.next
+                    print(temp2!.val)
+                    node = temp2!
+                    temp2 = temp2!.next
                 }
             }
             if temp2 == nil {
-                node.next = t
+                node.next = temp
+
             }else {
                 
             }
-            
-            temp = t.next
+            t1 = temp!
+            temp = temp!.next
+            print(temp?.val as Any)
         }
         return dummy.next
     }
 }
-
+*/
 let l0 = ListNode(3)
 let l1 = ListNode(1)
 let l2 = ListNode(2)
 l0.next = l1
 l1.next = l2
 let obj = Solution()
-let res = obj.sortList(l1)
+let res = obj.sortList(l0)
 var temp = res
-while let t = temp {
-    print(t.val)
-    temp = t.next
-}
+//while let t = temp {
+//    print(t.val)
+//    temp = t.next
+//}
 
