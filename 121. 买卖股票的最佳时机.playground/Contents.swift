@@ -2,7 +2,32 @@ import UIKit
 
 //https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/
 // si lu: ji suan yi ge zui da cha zhi
-
+// dong tai gui hua wen ti [7,1,5,3,6,4]
+//class Solution {
+//    func maxProfit(_ prices: [Int]) -> Int {
+//        var sub = 0
+//        let cou = prices.count
+//        var dict = [Int: Int]()
+//        var min = prices.first!
+//        var max = min
+//        dict[min] = 0
+//        dict[max] = 0
+//        for (n, item) in prices.enumerated() {
+//            if item < min {
+//                let maxIndex = dict[max]!
+//                if n < cou - 1 {
+//                    min = item
+//                    dict[min] = min
+//                }
+//            }else if item >= max {
+//                let minIndex = dict[min]
+//            }
+//        }
+//        return sub
+//    }
+//}
+/// 最后一个不能是最小值，第一个不能是最大值
+/// 最小值最好靠前，最的值最好靠后
 class Solution {
     func maxProfit(_ prices: [Int]) -> Int {
         var sub = 0
@@ -27,28 +52,37 @@ class Solution {
         let max = sortA.last!
         var dict = [Int:Int]()
         for (n, item) in prices.enumerated() {
-            if let index = dict[item] {
+            if dict[item] != nil {
                 if item == min {
-                    
+
                 }else if item == max {
-                    if index > max {
-                        dict[item] = n
-                    }else {}
+                    dict[item] = n
                 }
-                
             }else {
-                dict[item] = n
+                if item == min && n == (cou - 1) {
+                    
+                }else if item == max && n == 0 {
+                    
+                }else {
+                    dict[item] = n
+                }
             }
         }
         let minIndex = dict[min]
         let maxIndex = dict[max]
         if minIndex! < maxIndex! {
             sub = max - min
+        }else {
+            let keysSorted = dict.keys.sorted()
+//            for item in keysSorted {
+//
+//            }
+            
         }
-    
+
         return sub
     }
-    
+
 }
 //class Solution {
 //    func maxProfit(_ prices: [Int]) -> Int {
