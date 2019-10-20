@@ -1,35 +1,116 @@
+//https://leetcode-cn.com/problems/roman-to-integer/
+//49
+//chai kai, zuo jia fa
+///LVIII
 
-enum Planet: Int {
-    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
-    subscript(n: Int) -> Planet {
-        return Planet(rawValue: n)!
-    }
-}
+//let s = "djkoiw"
+//let sArr = Array(s)
+//print(String(sArr[0...3]))
+//class Solution {
+//    func romanToInt(_ s: String) -> Int {
+//        let dict = ["I":1, "V":5, "X":10, "L":50,
+//                    "C":100, "D":500, "M":1000
+//            , "IV":4, "IX":9, "XL":40
+//            , "XC":90, "CD":400, "CM":900
+//            , "II":2, "III":3
+//        ]
+//        let len = s.count
+//        var sum = 0
+//        var index = 0
+//        let sArr = Array(s)
+//        while index <= len - 1 {
+//            if index == len - 3 {
+//                let sub3 = sArr[index...index+2]
+//                if String(sub3) == "III" {
+//                    sum += 3
+//                    index += 3
+//                    continue
+//                }
+//            }
+//            if index < len - 1 {
+//                let sub2 = sArr[index...index+1]
+//                if let value2 = dict[String(sub2)] {
+//                    sum += value2
+//                    index += 2
+//                    continue
+//                }
+//            }
+//            let sub = sArr[index]
+//            let cStr = String(sub)
+//            if let value1 = dict[cStr] {
+//                sum += value1
+//                index += 1
+//                continue
+//            }
+//        }
+//        return sum
+//    }
+//}
+//
 
-let p = Planet.mars
-print(p[5])
+//class Solution {
+//    func romanToInt(_ s: String) -> Int {
+//        let romanHash = ["I": 1, "V": 5, "X": 10, "L":50,
+//                      "C":100, "D":500, "M":1000, "IV": 3,
+//                      "IX": 8, "XL": 30, "XC": 80, "CD": 300, "CM": 800]
+//        var output = 0
+//        var flag = 0
+//        for index in s.indices {
+//            if flag != 0 {
+//                let subStr = String(s[s.index(index, offsetBy: -1)..<s.index(index, offsetBy: 1)])
+//                let char = String(s[index])
+//                output += romanHash[subStr] ?? 0 != 0 ? romanHash[subStr]! : romanHash[char]!
+//            }else {
+//                let char = String(s[index])
+//                output += romanHash[char]!
+//                flag = 1
+//            }
+//
+//        }
+//        return output
+//    }
+//}
+//
+//
+//let obj = Solution()
+//print(obj.romanToInt("MCMXCIV"))
+//print(obj.romanToInt("LVIII"))
+//print(obj.romanToInt("IX"))
+//print(obj.romanToInt("IV"))
+//print(obj.romanToInt("III"))
 
 
-
-
-class SomeClass {
-    subscript(index: Int) -> Int {
-        get {
-            return 1
-        }
-        set(newValue) {
-            
-        }
-//        return 1
-
-    }
-
-}
-
- let numbers = [16,58,510]
-numbers.map {_ in
-    
-}
+//enum Planet: Int {
+//    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+//    subscript(n: Int) -> Planet {
+//        return Planet(rawValue: n)!
+//    }
+//}
+//
+//let p = Planet.mars
+//print(p[5])
+//
+//
+//
+//
+//class SomeClass {
+//    subscript(index: Int) -> Int {
+//        get {
+//            return 1
+//        }
+//        set(newValue) {
+//
+//        }
+////        return 1
+//
+//    }
+//
+//}
+//
+// let numbers = [16,58,510]
+//numbers.map {_ in
+//
+//}
 
 //let finalSquare = 25
 //var square = 0
@@ -93,3 +174,9 @@ numbers.map {_ in
 //let range = welcome.index(welcome.endIndex, offsetBy: -6)..<welcome.endIndex
 //welcome.removeSubrange(range)
 
+
+
+
+
+//let s = "djkoiw"
+//print(String(s[s.index(s.startIndex, offsetBy: 1)..<s.index(s.startIndex, offsetBy: 3)]))
