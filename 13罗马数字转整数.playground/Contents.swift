@@ -177,6 +177,19 @@
 
 
 
-
+//
 //let s = "djkoiw"
-//print(String(s[s.index(s.startIndex, offsetBy: 1)..<s.index(s.startIndex, offsetBy: 3)]))
+////print(String(s[s.index(s.startIndex, offsetBy: 1)..<s.index(s.startIndex, offsetBy: 3)]))
+//for index in s.indices {
+//    let str = s[index]
+//    let a = 1
+//    if a == 1 {
+//
+//    }
+//    if str == "i" {
+//        print("iii")
+//    }
+////    print(s[index])
+//
+////    print(String(s[index]))
+//}
