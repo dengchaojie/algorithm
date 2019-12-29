@@ -38,7 +38,7 @@ n1.next = n2
 n2.next = n3
 n3.next = n4
 n4.next = n5
-n5.next = n2
+//n5.next = n2
 
 haveCicleOfListNode(list: n1)
 
