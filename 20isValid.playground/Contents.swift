@@ -5,6 +5,9 @@ class Solution {
         if s.count == 0 {
             return true
         }
+        
+        
+        
         if s.count % 2 != 0 {
             return false
         }
