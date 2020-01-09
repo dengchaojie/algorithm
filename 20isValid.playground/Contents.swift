@@ -8,6 +8,9 @@ class Solution {
         if s.count % 2 != 0 {
             return false
         }
+        
+        
+        
         var leftChars = [Character]()
 //        var rigtChars = [Character]()
 
