@@ -47,6 +47,9 @@ class Solution {
                     }
                 }
 
+                
+                
+                
             }else if str == "]" {
                 if leftChars.isEmpty {
                     return false
