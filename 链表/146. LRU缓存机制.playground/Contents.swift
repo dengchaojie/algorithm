@@ -9,8 +9,6 @@ import UIKit
  
  
  */
-
-
 class LRUCache {
     
     var capacity = 0
@@ -22,20 +20,13 @@ class LRUCache {
     init(_ capacity: Int) {
         self.capacity = capacity
         headNode.next = tailNode
+        tailNode.pre = headNode
     }
     
     func get(_ key: Int) -> Int {
         if let nodeExisted = dict[key] {
-            let preNode = nodeExisted.pre
-            let nextNode = nodeExisted.next
-            preNode?.next = nextNode
-            nextNode?.pre = preNode
-
-             let lastNode = tailNode.pre
-             lastNode?.next = nodeExisted
-             nodeExisted.pre = lastNode
-             nodeExisted.next = tailNode
-            tailNode.pre = nodeExisted
+            remove(nodeExisted)
+            insert(nodeExisted)
             return nodeExisted.value
         } else {
             return -1
@@ -45,50 +36,135 @@ class LRUCache {
     func put(_ key: Int, _ value: Int) {
         // is existed
         if let nodeExisted = dict[key] {
-  
-            let preNode = nodeExisted.pre
-            let nextNode = nodeExisted.next
-            preNode?.next = nextNode
-            nextNode?.pre = preNode
-
+            remove(nodeExisted)
             nodeExisted.value = value
-            let lastNode = tailNode.pre
-            lastNode?.next = nodeExisted
-            nodeExisted.pre = lastNode
-            nodeExisted.next = tailNode
-            tailNode.pre = nodeExisted
+            insert(nodeExisted)
         } else {
             if capacity == 0 {
                 let oldNode = headNode.next
-                dict[(oldNode?.key)!] = nil
+                remove(oldNode)
+                let oldKey = oldNode?.key
+                if let temp = oldKey {
+                    dict[temp] = nil
+                }
                 
                 oldNode?.key = key
                 oldNode?.value = value
-        
-
-                headNode.next = oldNode?.next
-                oldNode?.next?.pre = headNode
+                insert(oldNode)
+                dict[key] = oldNode
                 
-                let lastNode = tailNode.pre
-                lastNode?.next = oldNode
-                oldNode?.pre = lastNode
-                oldNode?.next = tailNode
-                tailNode.pre = oldNode
             } else {
                 let node = ListNode.init(key, value)
-                let lastNode = tailNode.pre
-                lastNode?.next = node
-                node.pre = lastNode
-                node.next = tailNode
-                tailNode.pre = node
+                insert(node)
                 dict[key] = node
                 
                 capacity = capacity - 1
             }
-            
         }
     }
+    
+    func insert(_ node: ListNode?) {
+        guard let node = node else {
+            return
+        }
+        let lastNode = tailNode.pre
+        lastNode?.next = node
+        node.pre = lastNode
+        node.next = tailNode
+        tailNode.pre = node
+    }
+    
+    func remove(_ node: ListNode?) {
+        guard let node = node else {
+            return
+        }
+        node.pre?.next = node.next
+        node.next?.pre = node.pre
+        node.pre = nil
+        node.next = nil
+        
+        
+    }
 }
+
+//class LRUCache {
+//
+//    var capacity = 0
+//    var headNode = ListNode.init(0, 0)
+//    var tailNode = ListNode.init(0, 0)
+//    var dict = [Int: ListNode]()
+//
+//
+//    init(_ capacity: Int) {
+//        self.capacity = capacity
+//        headNode.next = tailNode
+//        tailNode.pre = headNode
+//    }
+//
+//    func get(_ key: Int) -> Int {
+//        if let nodeExisted = dict[key] {
+//            let preNode = nodeExisted.pre
+//            let nextNode = nodeExisted.next
+//            preNode?.next = nextNode
+//            nextNode?.pre = preNode
+//
+//             let lastNode = tailNode.pre
+//             lastNode?.next = nodeExisted
+//             nodeExisted.pre = lastNode
+//             nodeExisted.next = tailNode
+//            tailNode.pre = nodeExisted
+//            return nodeExisted.value
+//        } else {
+//            return -1
+//        }
+//    }
+//
+//    func put(_ key: Int, _ value: Int) {
+//        // is existed
+//        if let nodeExisted = dict[key] {
+//
+//            let preNode = nodeExisted.pre
+//            let nextNode = nodeExisted.next
+//            preNode?.next = nextNode
+//            nextNode?.pre = preNode
+//
+//            nodeExisted.value = value
+//            let lastNode = tailNode.pre
+//            lastNode?.next = nodeExisted
+//            nodeExisted.pre = lastNode
+//            nodeExisted.next = tailNode
+//            tailNode.pre = nodeExisted
+//        } else {
+//            if capacity == 0 {
+//                let oldNode = headNode.next
+//                let oldKey = oldNode?.key
+//                headNode.next = oldNode?.next
+//                oldNode?.next?.pre = headNode
+//                if let temp = oldKey {
+//                    dict[temp] = nil
+//                }
+//                oldNode?.key = key
+//                oldNode?.value = value
+//                let lastNode = tailNode.pre
+//                lastNode?.next = oldNode
+//                oldNode?.pre = lastNode
+//                oldNode?.next = tailNode
+//                tailNode.pre = oldNode
+//                dict[key] = oldNode
+//            } else {
+//                let node = ListNode.init(key, value)
+//                let lastNode = tailNode.pre
+//                lastNode?.next = node
+//                node.pre = lastNode
+//                node.next = tailNode
+//                tailNode.pre = node
+//                dict[key] = node
+//
+//                capacity = capacity - 1
+//            }
+//        }
+//    }
+//}
 
 class ListNode {
     var key: Int
@@ -101,6 +177,22 @@ class ListNode {
         self.value = value
     }
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ */
+
+let obj = LRUCache(2)
+obj.put(1, 1)
+obj.put(2, 2)
+obj.get(1)
+obj.put(3, 3)
+obj.get(2)
+obj.put(4, 4)
+obj.get(1)
+obj.get(3)
+obj.get(4)
+
 
 
 //class LRUCache {
@@ -163,9 +255,4 @@ class ListNode {
  */
 
 
-/**
- * Your LRUCache object will be instantiated and called as such:
- * let obj = LRUCache(capacity)
- * let ret_1: Int = obj.get(key)
- * obj.put(key, value)
- */
+
