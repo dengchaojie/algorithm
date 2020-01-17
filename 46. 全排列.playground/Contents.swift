@@ -4,6 +4,10 @@
 class Solution {
     func permute(_ nums: [Int]) -> [[Int]] {
         var res = [[Int]]()
+        
+        
+        
+        
         return res
     }
 }
