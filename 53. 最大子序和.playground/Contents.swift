@@ -1,19 +1,29 @@
 import UIKit
 
 //https://leetcode-cn.com/problems/maximum-subarray/
-// 07
+// 56
 // guan zhu zheng shu huozhe fu shu
-
+// 数组 分治 动态规划
+/**
+* Question Link: https://leetcode.com/problems/maximum-subarray/
+* Primary idea: Dynamic Programming, each character should be either with previous sequence or
+*                 start a new sequence as the maximum one
+* Time Complexity: O(n), Space Complexity: O(1)
+ 动态规划
+*/
 class Solution {
     func maxSubArray(_ nums: [Int]) -> Int {
-        if nums.count == 0 {
-            return 0
-        }
-        let numsSorted = nums.sorted()
-        let max = numsSorted.last!
-        var sum = 0
+        var max_current = nums[0]
+        var max_global = nums[0]
         
-        return sum
+        for index in 1..<nums.count {
+            // 遍历到当前元素，加上当前的最大值，和自身比较，取最大值做为新的当前最大值
+            max_current = max(max_current + nums[index], nums[index])
+            // 当前最大值和遍历到现在的最大值，在取最大值作为新的全局最大值
+            max_global = max(max_current, max_global)
+        }
+        
+        return max_global
         
     }
 }
