@@ -12,6 +12,9 @@ class Solution {
         let chars = Array(s)
         for (index, item) in chars.enumerated() {
             
+            
+            
+            
         }
         
         
