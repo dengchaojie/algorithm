@@ -7,13 +7,13 @@ import UIKit
  * Definition for singly-linked list.
  * 04
  */
- public class ListNode {
-      public var val: Int
-      public var next: ListNode?
-      public init(_ val: Int) {
-          self.val = val
-          self.next = nil
-      }
+public class ListNode {
+  public var val: Int
+  public var next: ListNode?
+  public init(_ val: Int) {
+      self.val = val
+      self.next = nil
+  }
 }
 
 // 递归遍历
