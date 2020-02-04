@@ -14,12 +14,12 @@ class Solution {
             cars.append(car)
         }
         cars.sort { (a, b) -> Bool in
-            return a.position > b.position
+            return a.position < b.position
         }
         var result = 0, j = count - 1
         while j > 0 {
-            if cars[j - 1].time >= cars[j].time {
-               cars[j].time = cars[j - 1].time
+            if cars[j - 1].time < cars[j].time {
+               cars[j-1].time = cars[j].time
 //                print("kdk")
             }else {
                 result += 1
@@ -50,17 +50,16 @@ class Car {
 
 let obj = Solution()
 //obj.carFleet(10, [6,8], [3,2])
-obj.carFleet(10, [0, 4, 2], [2, 1, 3])
+//obj.carFleet(10, [0, 4, 2], [2, 1, 3])
+obj.carFleet(12, [10,8,0,5,3], [2,4,1,1,3])
+
+//    12
+//10 8  5 3 0
+//2  4  7 9 12
+//2  4  1 3 1
+//1  1  7 3 12
 
 
-//4 2
-//1.33 1
-//8 6
-//1 1.33
-
-//0 4 2 10 6 8
-//2 1 3 5 6 2.6
-//10   8   6
-//5    2.6 5
-
-
+// 0  3 5 8 10
+// 12 3 7 7 1
+//10 [3 5 8] 3
