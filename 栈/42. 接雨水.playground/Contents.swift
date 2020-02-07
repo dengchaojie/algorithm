@@ -2,39 +2,63 @@ import UIKit
 
 //https://leetcode-cn.com/problems/trapping-rain-water/
 
-// 栈
-// 如果当前高度比栈顶下标对应的高度大，那么就会产生雨量
-
+// 双指针：如果height[left] < height[right]，那么累加左边雨水，否则累加右边雨水
 class Solution {
     func trap(_ height: [Int]) -> Int {
         if height.count == 0 {
             return 0
         }
-        var res = 0
-        var current = 0
-        var stack = [Int]()
-        while current < height.count {
-            while !stack.isEmpty && height[current] > height[stack.last!] {
-                let topIndex = stack.last!
-                stack.removeLast()
-                if stack.isEmpty {
-                    break
-                }
-                let distance = current - stack.last! - 1
-                // 当前高度和栈顶下标对应的高度的最小值，
-                let subHeight = min(height[current], height[stack.last!]) -
-                height[topIndex]
-                res += distance * subHeight
+        var ans = 0
+        var left = 0, right = height.count - 1
+        var leftMax = 0, rightMax = 0
+        while left < right {
+            if height[left] < height[right] {
+                height[left] > leftMax ? (leftMax = height[left]) :
+                (ans += (leftMax - height[left]))
+                left += 1
+            }else {
+                height[right] > rightMax ? (rightMax = height[right]) :
+                (ans += (rightMax - height[right]))
+                right -= 1
             }
-            
-            stack.append(current)
-            current += 1
         }
-        return res
+        return ans
     }
     
-    
 }
+// 栈
+// 如果当前高度比栈顶下标对应的高度大，那么就会产生雨量
+//
+//class Solution {
+//    func trap(_ height: [Int]) -> Int {
+//        if height.count == 0 {
+//            return 0
+//        }
+//        var res = 0
+//        var current = 0
+//        var stack = [Int]()
+//        while current < height.count {
+//            while !stack.isEmpty && height[current] > height[stack.last!] {
+//                let topIndex = stack.last!
+//                stack.removeLast()
+//                if stack.isEmpty {
+//                    break
+//                }
+//                let distance = current - stack.last! - 1
+//                // 当前高度和栈顶下标对应的高度的最小值，
+//                let subHeight = min(height[current], height[stack.last!]) -
+//                height[topIndex]
+//                res += distance * subHeight
+//            }
+//
+//            stack.append(current)
+//            current += 1
+//        }
+//        return res
+//    }
+//
+//
+//}
 let obj = Solution()
 obj.trap([0,1,0,2,1,0,1,3,2,1,2,1])
 
