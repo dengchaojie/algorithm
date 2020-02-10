@@ -10,8 +10,46 @@ public class ListNode {
         self.next = nil
     }
 }
-
+//4->2->1->3     -1->5->3->4->0
+//2 1 3 4        -1 3   4 0 5
+//1 2 3 4        -1 3 0 4 5
+// -1 0 3 4 5
 class Solution {
+    //相邻元素比较，如果前者比后者大，换位置
+    func sortList2(_ head: ListNode?) -> ListNode? {
+        guard head != nil else {
+            return head
+        }
+        let dummy = ListNode(-100)
+        var prev = head
+        dummy.next = prev
+        var post = prev?.next
+        var isContinue = false
+        while post != nil {
+            if prev!.val > post!.val {
+                let next = post?.next
+                post?.next = prev
+                prev?.next = next
+                let temp = prev
+                prev = post
+                post = temp
+                isContinue = true
+            }else {
+                prev = post
+                post = post?.next
+            }
+            if post == nil {
+                if isContinue {
+                    isContinue = false
+                    post = dummy.next
+                }else {
+                    break
+                }
+            }
+        }
+        return dummy.next
+    }
+    
     func sortList(_ head: ListNode?) -> ListNode? {
         let dummy = ListNode(-1)
 
@@ -55,10 +93,10 @@ l1.next = l2
 l2.next = l3
 l3.next = l4
 let obj = Solution()
-let res = obj.sortList(l0)
+let res = obj.sortList2(l0)
 var temp = res
-while let t = temp {
-    print(t.val)
-    temp = t.next
-}
+//while let t = temp {
+//    print(t.val)
+//    temp = t.next
+//}
 
