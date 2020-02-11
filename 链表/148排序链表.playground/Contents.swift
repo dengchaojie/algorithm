@@ -15,6 +15,37 @@ public class ListNode {
 //1 2 3 4        -1 3 0 4 5
 // -1 0 3 4 5
 class Solution {
+    //分割和合并
+    func sortList3(_ head: ListNode?) -> ListNode? {
+        // 分割
+        if head == nil || head?.next == nil {
+            return head
+        }
+        var slow = head, fast = head?.next
+        while fast != nil && fast?.next != nil {
+            slow = slow?.next
+            fast = fast?.next?.next
+        }
+        let post = slow?.next
+        slow?.next = nil
+        var left = sortList3(head)
+        var right = sortList3(post)
+        // 合并
+        var h = ListNode(0)
+        let res = h
+        while left != nil && right != nil {
+            if left!.val < right!.val {
+                h.next = left
+                left = left?.next
+            }else {
+                h.next = right
+                right = right?.next
+            }
+            h = h.next!
+        }
+        h.next = left != nil ? left : right
+        return res.next
+    }
     //相邻元素比较，如果前者比后者大，换位置
     func sortList2(_ head: ListNode?) -> ListNode? {
         guard head != nil else {
@@ -93,10 +124,10 @@ l1.next = l2
 l2.next = l3
 l3.next = l4
 let obj = Solution()
-let res = obj.sortList2(l0)
+let res = obj.sortList3(l0)
 var temp = res
-//while let t = temp {
-//    print(t.val)
-//    temp = t.next
-//}
+while let t = temp {
+    print(t.val)
+    temp = t.next
+}
 
