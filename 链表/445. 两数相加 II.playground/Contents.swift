@@ -18,19 +18,82 @@ public class ListNode {
  1 2 3 4
  */
 class Solution {
-    //背包
+    //进阶：不改变原node，利用栈来实现
     func addTwoNumbers3(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var l1 = l1, l2 = l2
+        var stack1 = [Int]()
+        var stack2 = [Int]()
+        var res = [Int]()
+        while l1 != nil {
+            stack1.append(l1!.val)
+            l1 = l1?.next
+        }
+        while l2 != nil {
+            stack2.append(l2!.val)
+            l2 = l2?.next
+        }
+        var carry = 0
+        while !stack1.isEmpty || !stack2.isEmpty || carry == 1 {
+            var sum = 0
+            if let last = stack1.last {
+                sum += last
+                stack1.removeLast()
+            }
+            if let last = stack2.last {
+                sum += last
+                stack2.removeLast()
+            }
+            sum += carry
+            if sum >= 10 {
+                sum = sum - 10
+                carry = 1
+            }else {
+                carry = 0
+            }
+            res.append(sum)
+        }
+        let dummy = ListNode(0)
+        var p = dummy
+        while !res.isEmpty {
+            p.next = ListNode(res.last!)
+            res.removeLast()
+            p = p.next!
+        }
+        return dummy.next
+    }
+    
+    func addTwoNumbers22(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         guard let l1 = l1 else { return l2 }
         guard let l2 = l2 else { return l1 }
-        
-        let outputNode = ListNode((l1.val + l2.val)%10)
-        if l1.val + l2.val > 9 {
-            outputNode.next = addTwoNumbers3(addTwoNumbers3(l1.next
-                , l2.next), ListNode(1))
-        }else {
-            outputNode.next = addTwoNumbers3(l1.next, l2.next)
+        let res = ListNode(0)
+        var p = res
+        var reverseL1 = reverseList(l1)
+        var reverseL2 = reverseList(l2)
+        var bag = 0
+        while reverseL1 != nil || reverseL2 != nil || bag == 1 {
+            var num = 0
+            if reverseL1 != nil {
+                num += reverseL1!.val
+                reverseL1 = reverseL1?.next
+            }
+            if reverseL2 != nil {
+                num += reverseL2!.val
+                reverseL2 = reverseL2?.next
+            }
+            num += bag
+            if num >= 10 {
+                num = num%10
+                bag = 1
+            }else {
+                bag = 0
+            }
+            p.next = ListNode(num)
+            p = p.next!
         }
-        return outputNode
+        let temp = res.next
+        res.next = nil
+        return reverseList(temp)
+        
     }
     func addTwoNumbers2(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         // 反转
@@ -140,16 +203,16 @@ node2.next = node3
 head2.next = node5
 
 let obj = Solution()
-let res = obj.reverseList(head)
-var p = res
-while p != nil {
-    print(p?.val)
-    p = p?.next
-}
-// 193 49
-//let res = obj.addTwoNumbers3(head, head2)
+//let res = obj.reverseList(head)
 //var p = res
 //while p != nil {
 //    print(p?.val)
 //    p = p?.next
 //}
+// 193 49
+let res = obj.addTwoNumbers3(head, head2)
+var p = res
+while p != nil {
+    print(p?.val)
+    p = p?.next
+}
