@@ -1,4 +1,7 @@
 
+
+
+
 // 202002262132
 class Solution {
     
@@ -31,16 +34,16 @@ class Solution {
         return res
     }
     
-    
+
 }
 
 let obj = Solution()
 //let arr = [ 9, 6, 12, 1, 4]
-let arr = [2,3,5,7,1,4,6,15,5,2,7,9,10,15,9,17,12]
-let arr2 = [ 9, 16, 12, 41, 40]
-let arr3 = [ 93, 62, 12, 81, 54]
+//let arr = [2,3,5,7,1,4,6,15,5,2,7,9,10,15,9,17,12]
+//let arr2 = [ 9, 16, 12, 41, 40]
+//let arr3 = [ 93, 62, 12, 81, 54]
 
-obj.sortQuickly(arr)
+//obj.sortQuickly(arr)
 //obj.sortQuickly(arr2)
 //obj.sortQuickly(arr3)
 
