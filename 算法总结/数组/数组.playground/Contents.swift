@@ -1,5 +1,46 @@
 
+// 200227遗留问题，为什么在做一次.compactMap{ $0 }
+public class TreeNode {
+    public var val: Int
+    public var left: TreeNode?
+    public var right: TreeNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.left = nil
+        self.right = nil
+    }
+}
 
+let root = TreeNode(1)
+let node2 = TreeNode(2)
+let node3 = TreeNode(3)
+
+let node4 = TreeNode(4)
+let node5 = TreeNode(5)
+let node6 = TreeNode(6)
+root.left = node2
+root.right = node3
+
+node4.left = node5
+node4.right = node6
+let currentLevel = [root, node4]
+//let res = currentLevel.flatMap { (root) -> [TreeNode] in
+//    return [root.left!, root.right!]
+//}
+//let values = res.compactMap { (node) -> Int in
+//    return node.val
+//}
+//for item in res {
+//    print(item.val)
+//}
+//for item in values {
+//    print(item)
+//}
+
+let result = currentLevel.flatMap { [$0.left, $0.right] }.compactMap{ $0 }
+for item in result {
+    print(item.val)
+}
 /*
  　　问题：给你n个无序的int整型数组arr，并且这些整数的取值范围都在0-20之间，要你在 O(n) 的时间复杂度中把这 n 个数按照从小到大的顺序打印出来。
  */
