@@ -27,6 +27,9 @@
  *     }
  * }
  */
+import UIKit
+let btn = UIButton()
+btn.isKind(of: UIButton.classForCoder())
 
 public class ListNode {
     public var val: Int
